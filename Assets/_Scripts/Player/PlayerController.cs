@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(CharacterController), typeof(Animator))]
+[RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
 
@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     public LayerMask layerMask;
 
     private CharacterController _characterController;
-    private Animator _animator;
+    private PlayerAnimationController _animator;
 
     [SerializeField]
     private float _movementSpeed, _rotationSpeed, _jumpSpeed, _gravity;
@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         _characterController = GetComponent<CharacterController>();
-        _animator = GetComponent<Animator>();
+        //_animator = GetComponent<PlayerAnimationController>();
         Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -49,15 +49,15 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("Jump") && isGrounded())
         {
             movementDirection.y = _jumpSpeed;
-            _animator.SetTrigger("jump");
+            _animator.PlayJump();
         }
         movementDirection.y -= _gravity * Time.deltaTime;
 
         _characterController.Move(movementDirection * Time.deltaTime);
 
-        _animator.SetBool("isRunning", inputMovement.magnitude != 0);
+        _animator.IsRunning = inputMovement.magnitude != 0;
 
-        _animator.SetBool("isInAir", !isGrounded());
+        _animator.IsInAir = !isGrounded();
 
 
     }
