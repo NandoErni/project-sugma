@@ -23,8 +23,6 @@ public class PlayerController : MonoBehaviour
         _characterController = GetComponent<CharacterController>();
         _animator = GetComponent<PlayerAnimationController>();
 
-        var two = GetComponent<TestTwo>();
-        two.IsRunning = true;
         Cursor.lockState = CursorLockMode.Locked;
     }
 
