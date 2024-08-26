@@ -4,20 +4,22 @@ using UnityEngine;
 
 public class PlayerAnimationController : MonoBehaviour
 {
+    private bool _isRunning;
+    private bool _isInAir;
 
     public bool IsRunning {
-        get { return IsRunning; }
+        get { return _isRunning; }
         set {
-            IsRunning = value;
+            _isRunning = value;
             PlayIsRunning();
         }
     }
     public bool IsInAir
     {
-        get { return IsInAir; }
+        get { return _isInAir; }
         set
         {
-            IsInAir = value;
+            _isInAir = value;
             PlayIsInAir();
         }
     }

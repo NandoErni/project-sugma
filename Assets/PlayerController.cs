@@ -21,7 +21,10 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         _characterController = GetComponent<CharacterController>();
-        //_animator = GetComponent<PlayerAnimationController>();
+        _animator = GetComponent<PlayerAnimationController>();
+
+        var two = GetComponent<TestTwo>();
+        two.IsRunning = true;
         Cursor.lockState = CursorLockMode.Locked;
     }
 

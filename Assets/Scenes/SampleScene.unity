@@ -31041,6 +31041,8 @@ GameObject:
   - component: {fileID: 5128762478557773153}
   - component: {fileID: 3001373778369122331}
   - component: {fileID: 8175827270991040371}
+  - component: {fileID: 8175827270991040373}
+  - component: {fileID: 8175827270991040372}
   m_Layer: 0
   m_Name: Madame
   m_TagString: Untagged
@@ -31071,6 +31073,30 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0.95, z: 0}
+--- !u!114 &8175827270991040372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8175827270991040370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad1a8b4a9f46d4a98b7c469d84d2f2bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8175827270991040373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8175827270991040370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6765c0f2b15d741f8ab0b68f362a985a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8219362072364434077
 GameObject:
   m_ObjectHideFlags: 0
@@ -31145,8 +31171,9 @@ GameObject:
   - component: {fileID: 5006512735121165783}
   - component: {fileID: 3166231814071738541}
   - component: {fileID: 365192912}
-  - component: {fileID: 8296172669415145413}
   - component: {fileID: 365192911}
+  - component: {fileID: 8296172669415145413}
+  - component: {fileID: 8296172669415145414}
   m_Layer: 0
   m_Name: Hombre
   m_TagString: Untagged
@@ -31164,6 +31191,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8aa6fb0846d2a4b0493d3dc0f5790bd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8296172669415145414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8296172669415145412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6765c0f2b15d741f8ab0b68f362a985a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &8361262819891315674
