@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerInput : MonoBehaviour
 {
+    [HideInInspector]
     public Vector2 Movement;
 
     public InputAction Jumping => _input.Player.Jumping;

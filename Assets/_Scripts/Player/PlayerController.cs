@@ -15,8 +15,16 @@ public class PlayerController : MonoBehaviour
     private PlayerInput _input;
 
 
+    [Header("Player Movement")]
     [SerializeField]
-    private float _movementSpeed, _rotationSpeed, _jumpSpeed, _gravity;
+    private float _movementSpeed;
+    [SerializeField]
+    private float _rotationSpeed;
+    [SerializeField]
+    private float _jumpSpeed;
+    [SerializeField]
+    private float _gravity;
+
     private Vector3 _velocity;
 
     private void OnDisable()
@@ -33,12 +41,13 @@ public class PlayerController : MonoBehaviour
         _input.Jumping.performed += OnJumping;
 
         Cursor.lockState = CursorLockMode.Locked;
+
+        MusicController.Instance.PlayMusic(MusicClipType.Theme);
     }
 
     void Update()
     {
         MovePlayer();
-
 
         HandleGravity();
 
@@ -64,7 +73,7 @@ public class PlayerController : MonoBehaviour
 
         if (movementDirection.magnitude != 0)
         {
-            transform.forward = Vector3.Lerp(transform.forward, movementDirection.normalized, 5 * Time.deltaTime);
+            transform.forward = Vector3.Lerp(transform.forward, movementDirection.normalized, _rotationSpeed * Time.deltaTime);
         }
 
         _animator.IsRunning = movementDirection.magnitude != 0;
@@ -85,10 +94,8 @@ public class PlayerController : MonoBehaviour
 
     private void OnJumping(InputAction.CallbackContext obj)
     {
-        Debug.Log("Jump");
         if (isGrounded())
         {
-            Debug.Log("Puj");
             _velocity.y = _jumpSpeed;
             _animator.PlayJump();
         }
@@ -97,6 +104,5 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded()
     {
         return _characterController.isGrounded;
-        return Physics.CheckSphere(transform.position, isGroundedSphereRadius, layerMask);
     }
 }
