@@ -1,70 +1,102 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(CharacterController)),
+    RequireComponent(typeof(PlayerAnimationController)),
+    RequireComponent(typeof(PlayerInput))]
 public class PlayerController : MonoBehaviour
 {
-
-
+    [Header("Grounding Check")]
     public float isGroundedSphereRadius;
     public LayerMask layerMask;
 
     private CharacterController _characterController;
     private PlayerAnimationController _animator;
+    private PlayerInput _input;
+
 
     [SerializeField]
     private float _movementSpeed, _rotationSpeed, _jumpSpeed, _gravity;
-    private Vector3 movementDirection = Vector3.zero;
+    private Vector3 _velocity;
 
-    // Start is called before the first frame update
+    private void OnDisable()
+    {
+
+        _input.Jumping.performed -= OnJumping;
+    }
+
     void Start()
     {
         _characterController = GetComponent<CharacterController>();
         _animator = GetComponent<PlayerAnimationController>();
+        _input = GetComponent<PlayerInput>();
+        _input.Jumping.performed += OnJumping;
 
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        var forward = Camera.main.transform.forward;
-        forward.y = 0;
-        forward = forward.normalized;
-
-        var right = Camera.main.transform.right;
-        right.y = 0;
-        right = right.normalized;
-
-        Vector3 inputMovement = forward * _movementSpeed * Input.GetAxisRaw("Vertical");
-        inputMovement += right * _movementSpeed * Input.GetAxisRaw("Horizontal");
-        _characterController.Move(inputMovement * Time.deltaTime);
-
-        if (inputMovement.magnitude != 0)
-        {
-            transform.forward = Vector3.Lerp(transform.forward, inputMovement.normalized, 10*Time.deltaTime);
-        }
+        MovePlayer();
 
 
-        if (Input.GetButtonDown("Jump") && isGrounded())
-        {
-            movementDirection.y = _jumpSpeed;
-            _animator.PlayJump();
-        }
-        movementDirection.y -= _gravity * Time.deltaTime;
-
-        _characterController.Move(movementDirection * Time.deltaTime);
-
-        _animator.IsRunning = inputMovement.magnitude != 0;
-
-        _animator.IsInAir = !isGrounded();
-
+        HandleGravity();
 
     }
 
-    bool isGrounded()
+    private Vector3 GetMovementDirection()
     {
+        var cameraForward = Camera.main.transform.forward;
+        cameraForward.y = 0;
+
+        var cameraRight = Camera.main.transform.right;
+        cameraRight.y = 0;
+
+        return cameraForward * _input.Movement.y + cameraRight * _input.Movement.x;
+    }
+
+    private void MovePlayer()
+    {
+        var movementDirection = GetMovementDirection();
+        movementDirection = movementDirection.normalized * _movementSpeed * Time.deltaTime;
+
+        _characterController.Move(movementDirection);
+
+        if (movementDirection.magnitude != 0)
+        {
+            transform.forward = Vector3.Lerp(transform.forward, movementDirection.normalized, 5 * Time.deltaTime);
+        }
+
+        _animator.IsRunning = movementDirection.magnitude != 0;
+    }
+
+    private void HandleGravity()
+    {
+        if (isGrounded() && _velocity.y < 0)
+        {
+            _velocity.y = -2;
+        }
+        _velocity.y -= _gravity * Time.deltaTime;
+
+        _characterController.Move(_velocity * Time.deltaTime);
+
+        _animator.IsInAir = !isGrounded();
+    }
+
+    private void OnJumping(InputAction.CallbackContext obj)
+    {
+        Debug.Log("Jump");
+        if (isGrounded())
+        {
+            Debug.Log("Puj");
+            _velocity.y = _jumpSpeed;
+            _animator.PlayJump();
+        }
+    }
+
+    private bool isGrounded()
+    {
+        return _characterController.isGrounded;
         return Physics.CheckSphere(transform.position, isGroundedSphereRadius, layerMask);
     }
 }

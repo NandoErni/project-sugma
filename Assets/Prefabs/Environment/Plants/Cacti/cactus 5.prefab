@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2907572450802728452}
   - component: {fileID: 3286910712706130665}
   - component: {fileID: 4166991364492216177}
-  - component: {fileID: 4101012585134212585}
+  - component: {fileID: 6713010130885489794}
   m_Layer: 0
   m_Name: cactus 5
   m_TagString: Untagged
@@ -84,8 +84,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &4101012585134212585
-CapsuleCollider:
+--- !u!65 &6713010130885489794
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -102,8 +102,6 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.769721
-  m_Height: 2.340212
-  m_Direction: 1
+  serializedVersion: 3
+  m_Size: {x: 1.5035188, y: 2.340212, z: 1.539442}
   m_Center: {x: 0.060111314, y: 1.170106, z: -0.039475262}
