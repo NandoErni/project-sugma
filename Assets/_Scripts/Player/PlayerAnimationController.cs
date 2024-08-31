@@ -36,6 +36,11 @@ public class PlayerAnimationController : MonoBehaviour
         _animator.SetTrigger("jump");
     }
 
+    public void PlaySoundOnAnimation(SFXClipType clipType)
+    {
+        SFXController.Instance.PlaySound(clipType);
+    }
+
     private void PlayIsRunning()
     {
 
@@ -47,6 +52,8 @@ public class PlayerAnimationController : MonoBehaviour
 
         _animator.SetBool("isInAir", IsInAir);
     }
+
+
 
 
 }
