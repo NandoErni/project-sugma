@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float _movementSpeed;
     [SerializeField]
+    private float _sprintingSpeed;
+    [SerializeField]
     private float _rotationSpeed;
     [SerializeField]
     private float _jumpSpeed;
@@ -69,13 +71,18 @@ public class PlayerController : MonoBehaviour
         var movementDirection = GetMovementDirection();
         movementDirection = movementDirection.normalized * _movementSpeed * Time.deltaTime;
 
+        if (_input.IsRunning)
+        {
+            movementDirection *= _sprintingSpeed;
+        }
+
         _characterController.Move(movementDirection);
 
         if (movementDirection.magnitude != 0)
         {
             transform.forward = Vector3.Lerp(transform.forward, movementDirection.normalized, _rotationSpeed * Time.deltaTime);
         }
-
+        _animator.IsSprinting = movementDirection.magnitude != 0 && _input.IsRunning;
         _animator.IsRunning = movementDirection.magnitude != 0;
     }
 

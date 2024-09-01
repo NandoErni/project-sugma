@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerAnimationController : MonoBehaviour
 {
     private bool _isRunning;
+    private bool _isSprinting;
     private bool _isInAir;
 
     public bool IsRunning {
@@ -12,6 +13,15 @@ public class PlayerAnimationController : MonoBehaviour
         set {
             _isRunning = value;
             PlayIsRunning();
+        }
+    }
+    public bool IsSprinting
+    {
+        get { return _isSprinting; }
+        set
+        {
+            _isSprinting = value;
+            PlayIsSprinting();
         }
     }
     public bool IsInAir
@@ -45,6 +55,12 @@ public class PlayerAnimationController : MonoBehaviour
     {
 
         _animator.SetBool("isRunning", IsRunning);
+    }
+
+    private void PlayIsSprinting()
+    {
+
+        _animator.SetBool("isSprinting", IsSprinting);
     }
 
     private void PlayIsInAir()

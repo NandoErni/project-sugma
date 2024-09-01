@@ -10,12 +10,15 @@ public class PlayerInput : MonoBehaviour
 
     public InputAction Jumping => _input.Player.Jumping;
 
+    public bool IsRunning => _input.Player.Running.IsPressed();
+
     private CustomInput _input;
 
 
     private void Awake()
     {
         _input = new();
+        
     }
 
 
