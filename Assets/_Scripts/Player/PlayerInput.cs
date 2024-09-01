@@ -18,7 +18,6 @@ public class PlayerInput : MonoBehaviour
     private void Awake()
     {
         _input = new();
-        
     }
 
 
