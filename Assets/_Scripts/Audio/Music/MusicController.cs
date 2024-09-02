@@ -13,12 +13,6 @@ public class MusicController : MonoBehaviour
 
     private AudioSource _audioSource;
 
-    private void Start()
-    {
-        _audioSource = GetComponent<AudioSource>();
-        _library = GetComponent<MusicLibrary>();
-    }
-
     private void Awake()
     {
         if (Instance != null)
@@ -28,6 +22,8 @@ public class MusicController : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            _audioSource = GetComponent<AudioSource>();
+            _library = GetComponent<MusicLibrary>();
         }
     }
 

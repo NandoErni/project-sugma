@@ -11,7 +11,7 @@ public class MusicLibrary : MonoBehaviour
 
     public Dictionary<MusicClipType, AudioClip> MusicClipDict;
 
-    private void Start()
+    private void Awake()
     {
         MusicClipDict = _musicClips.ToDictionary(clip => clip.ClipType, clip => clip.AudioClip);
     }
